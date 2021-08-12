@@ -7,7 +7,7 @@ description = "A library to programatically create tracks for the online game Fr
 readme = "readme.md"
 homepage = "https://github.com/FRHD-Improvements/FreeRiderTrackFormat"
 repository = "https://github.com/FRHD-Improvements/FreeRiderTrackFormat"
-keywords = ["free rider", "frhd"]
+keywords = ["FreeRider", "frhd", "FreeRiderHD"]
 edition = "2018"
 
 [dependencies]
