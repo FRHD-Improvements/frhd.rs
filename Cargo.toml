@@ -1,0 +1,15 @@
+[package]
+name = "frhd"
+version = "0.1.0"
+authors = ["gaetgu <gabriel.ethan.phantom@gmail.com>"]
+license = "MIT"
+description = "A library to programatically create tracks for the online game FreeRider HD"
+readme = "readme.md"
+homepage = "https://github.com/FRHD-Improvements/FreeRiderTrackFormat"
+repository = "https://github.com/FRHD-Improvements/FreeRiderTrackFormat"
+keywords = ["free rider", "frhd"]
+edition = "2018"
+
+[dependencies]
+base32 = "0.4.0"
+base_custom = "0.2"
