@@ -75,15 +75,3 @@ impl Track {
         return final_data;
     }
 }
-
-fn main() {
-    let mut my_track = Track {
-        trackdata: String::new(),
-        physical: Vec::new(),
-        scenery: Vec::new(),
-        powerups: String::new(),
-    };
-
-    my_track.insert_boost(-20, -20, 20);
-    println!("{}", my_track.generate_code());
-}
