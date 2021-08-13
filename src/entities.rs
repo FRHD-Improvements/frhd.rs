@@ -13,14 +13,14 @@ impl Powerup {
             return format!("{} {} {},", 
                            self.powerup_type.to_string(), 
                            encode::base32_encode(self.x), 
-                           encode::base32_encode(self.y)
+                           encode::base32_encode(self.y * -1)
             );
         }
         
         return format!("{} {} {} {},", 
                        self.powerup_type, 
                        encode::base32_encode(self.x), 
-                       encode::base32_encode(self.y), 
+                       encode::base32_encode(self.y * -1), 
                        encode::base32_encode(self.rotation)
         );
     }
@@ -39,9 +39,9 @@ impl Line {
     pub fn encode(self) -> String {
         return format!("{} {} {} {},",
                         encode::base32_encode(self.x1),
-                        encode::base32_encode(self.y1),
+                        encode::base32_encode(self.y1 * -1),
                         encode::base32_encode(self.x2),
-                        encode::base32_encode(self.y2)
+                        encode::base32_encode(self.y2 * -1)
         );
     }
 }
