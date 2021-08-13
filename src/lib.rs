@@ -48,7 +48,7 @@ impl Track {
         self.powerups += &entities::Powerup { powerup_type: 'B', x, y, rotation: rot }.encode();
     }
 
-    pub fn insert_anti_gravity(&mut self, x: i32, y: i32, rot: i32) {
+    pub fn insert_anti_gravity(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'A', x, y, rotation: 999 }.encode();
     }
 
