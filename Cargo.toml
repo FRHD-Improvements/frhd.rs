@@ -1,6 +1,6 @@
 [package]
 name = "frhd"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["gaetgu <gabriel.ethan.phantom@gmail.com>"]
 license = "MIT"
 description = "A library to programatically create tracks for the online game FreeRider HD"
