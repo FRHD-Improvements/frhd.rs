@@ -7,15 +7,14 @@ mod encode;
 mod entities;
 
 pub struct Track {
-    trackdata: String,
-    physical: Vec<String>,
-    scenery: Vec<String>,
-    powerups: String,
+    pub trackdata: String,
+    pub physical: Vec<String>,
+    pub scenery: Vec<String>,
+    pub powerups: String,
 }
 
 impl Track {
-    #[allow(dead_code)]
-    fn insert_line(&mut self, x1: i32, y1: i32, x2: i32, y2: i32, line_type: char) {
+    pub fn insert_line(&mut self, x1: i32, y1: i32, x2: i32, y2: i32, line_type: char) {
         if line_type == 'p' {
             self.physical.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
         } else {
@@ -23,31 +22,31 @@ impl Track {
         }
     }
     
-    fn insert_check(&mut self, x: i32, y: i32) {
+    pub fn insert_check(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'C', x, y, rotation: 999 }.encode();
     }
 
-    fn insert_star(&mut self, x: i32, y: i32) {
+    pub fn insert_star(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'T', x, y, rotation: 999 }.encode();
     }
 
-    fn insert_slow_mo(&mut self, x: i32, y: i32) {
+    pub fn insert_slow_mo(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'S', x, y, rotation: 999 }.encode();
     }
 
-    fn insert_bomb(&mut self, x: i32, y: i32) {
+    pub fn insert_bomb(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'O', x, y, rotation: 999 }.encode();
     }
 
-    fn insert_gravity(&mut self, x: i32, y: i32, rot: i32) {
+    pub fn insert_gravity(&mut self, x: i32, y: i32, rot: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'G', x, y, rotation: rot }.encode();
     }
     
-    fn insert_boost(&mut self, x: i32, y: i32, rot: i32) {
+    pub fn insert_boost(&mut self, x: i32, y: i32, rot: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'B', x, y, rotation: rot }.encode();
     }
 
-    fn generate_code(&mut self) -> String {
+    pub fn generate_code(&mut self) -> String {
         for physical_line in &self.physical {
             self.trackdata += physical_line;
         }
