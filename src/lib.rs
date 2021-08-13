@@ -6,7 +6,7 @@
 mod encode;
 mod entities;
 
-struct Track {
+pub struct Track {
     trackdata: String,
     physical: Vec<String>,
     scenery: Vec<String>,
