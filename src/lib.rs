@@ -78,9 +78,9 @@ impl Track {
         // top/left
         for i in 0..size*2 {
             if line_type == 'p' {
-                self.physical.push(entities::Line{ line_type, x - (size), y + (size - 1 - i), x - (size - 1 - i), y + (size) }.encode());
+                self.physical.push(entities::Line{ line_type, x1: x - (size), y1: y + (size - 1 - i), x2: x - (size - 1 - i), y2: y + (size) }.encode());
             } else {
-                self.scenery.push(entities::Line{ line_type, x - (size), y + (size - 1 - i), x - (size - 1 - i), y + (size) }.encode());
+                self.scenery.push(entities::Line{ line_type, x1: x - (size), y1: y + (size - 1 - i), x2: x - (size - 1 - i), y2: y + (size) }.encode());
             }
         }
 
@@ -89,9 +89,9 @@ impl Track {
             println!("({}, {}), ({}, {})", x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size));
             
             if line_type == 'p' {
-                self.physical.push(entities::Line{ line_type  x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size) }.encode());
+                self.physical.push(entities::Line{ line_type, x1: x + (size), y1: y - (size - 1 - i), x2: x + (size - 1 - i), y2: y - (size) }.encode());
             } else {
-                self.scenery.push(entities::Line{ line_type, x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size) }.encode());
+                self.scenery.push(entities::Line{ line_type, x1: x + (size), y1: y - (size - 1 - i), x2: x + (size - 1 - i), y2: y - (size) }.encode());
             }
         }    
     }
