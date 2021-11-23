@@ -73,6 +73,29 @@ impl Track {
         self.powerups += &entities::Powerup { powerup_type: '4', x, y, rotation: 1000 }.encode();
     }
     
+    // Patterns
+    pub fn insert_stripes(&mut self, size: i32, x: i32, y: i32, line_type: char) {
+        // top/left
+        for i in 0..size*2 {
+            if line_type == 'p' {
+                self.physical.push(entities::Line{ line_type, x - (size), y + (size - 1 - i), x - (size - 1 - i), y + (size) }.encode());
+            } else {
+                self.scenery.push(entities::Line{ line_type, x - (size), y + (size - 1 - i), x - (size - 1 - i), y + (size) }.encode());
+            }
+        }
+
+        // bottom/right
+        for i in 0..(size*2)-1 {
+            println!("({}, {}), ({}, {})", x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size));
+            
+            if line_type == 'p' {
+                self.physical.push(entities::Line{ line_type  x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size) }.encode());
+            } else {
+                self.scenery.push(entities::Line{ line_type, x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size) }.encode());
+            }
+        }    
+    }
+    
     // Track code
     pub fn generate_code(&mut self) -> String {
         for physical_line in &self.physical {
