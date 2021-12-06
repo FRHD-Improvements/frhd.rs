@@ -1,8 +1,5 @@
 #![allow(dead_code)]
 
-// NOTE: This isn't working right now. Why? Good question.
-// TODO: Document my code so I can use it in the future.
-
 mod encode;
 mod entities;
 
@@ -22,7 +19,48 @@ impl Track {
             self.scenery.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
         }
     }
-    
+
+    // Insert diagonal stripes
+    pub fn insert_stripes(&mut self, size: i32, separation: i32, x: i32, y: i32, line_type: char) {
+        // top/left
+        for i in 0..size*2 {
+            if i % separation == 0 {
+                let x1 = x - size;
+                let y1 = y + (size - 1 - i);
+                let x2 = x - (size - 1 - i);
+                let y2 = y + size;
+
+                if line_type == 'p' {
+                    self.physical.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
+                } else {
+                    self.scenery.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
+                }
+            }
+        }
+
+        // bottom/right
+        for i in 0..(size*2)-1 {
+            if i % separation == 0 {
+                let x1 = x + size;
+                let y1 = y - (size - 1 - i);
+                let x2 = x + (size - 1 - i);
+                let y2 = y - size;
+
+                if line_type == 'p' {
+                    self.physical.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
+                } else {
+                    self.scenery.push(entities::Line{ line_type, x1, y1, x2, y2 }.encode());
+                }
+            }
+        }
+    }
+
+    // Fill a box (just use stripes with no space between them)
+    pub fn insert_box(&mut self, size: i32, x: i32, y: i32, line_type: char) {
+        self.insert_stripes(size, 1, x, y, line_type);
+    }
+
+
     // Powerups
     pub fn insert_check(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'C', x, y, rotation: 999 }.encode();
@@ -43,7 +81,7 @@ impl Track {
     pub fn insert_gravity(&mut self, x: i32, y: i32, rot: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'G', x, y, rotation: rot }.encode();
     }
-    
+
     pub fn insert_boost(&mut self, x: i32, y: i32, rot: i32) {
         self.powerups += &entities::Powerup { powerup_type: 'B', x, y, rotation: rot }.encode();
     }
@@ -72,31 +110,8 @@ impl Track {
     pub fn insert_blob(&mut self, x: i32, y: i32) {
         self.powerups += &entities::Powerup { powerup_type: '4', x, y, rotation: 1000 }.encode();
     }
-    
-    // Patterns
-    pub fn insert_stripes(&mut self, size: i32, x: i32, y: i32, line_type: char) {
-        // top/left
-        for i in 0..size*2 {
-            if line_type == 'p' {
-                self.physical.push(entities::Line{ line_type, x1: x - (size), y1: y + (size - 1 - i), x2: x - (size - 1 - i), y2: y + (size) }.encode());
-            } else {
-                self.scenery.push(entities::Line{ line_type, x1: x - (size), y1: y + (size - 1 - i), x2: x - (size - 1 - i), y2: y + (size) }.encode());
-            }
-        }
 
-        // bottom/right
-        for i in 0..(size*2)-1 {
-            println!("({}, {}), ({}, {})", x + (size), y - (size - 1 - i), x + (size - 1 - i), y - (size));
-            
-            if line_type == 'p' {
-                self.physical.push(entities::Line{ line_type, x1: x + (size), y1: y - (size - 1 - i), x2: x + (size - 1 - i), y2: y - (size) }.encode());
-            } else {
-                self.scenery.push(entities::Line{ line_type, x1: x + (size), y1: y - (size - 1 - i), x2: x + (size - 1 - i), y2: y - (size) }.encode());
-            }
-        }    
-    }
-    
-    // Track code
+    // Track code generation
     pub fn generate_code(&mut self) -> String {
         for physical_line in &self.physical {
             self.trackdata += physical_line;
