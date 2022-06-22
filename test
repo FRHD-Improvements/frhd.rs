@@ -1,0 +1,7 @@
+#!/usr/local/bin/fish
+
+set current_dir $PWD
+
+cd ~/projects/FRHDEditor/pinwheel
+cargo run
+cd $current_dir
