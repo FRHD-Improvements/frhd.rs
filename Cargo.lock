@@ -16,7 +16,7 @@ checksum = "11618f234905abd75cc842f4eaeb0fbbaaa457eb0752fa46f8c22d44e3497dd2"
 
 [[package]]
 name = "frhd"
-version = "0.1.52"
+version = "0.1.53"
 dependencies = [
  "base32",
  "base_custom",
